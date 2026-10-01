@@ -11,9 +11,8 @@ albedo_color = Color(0.8590551, 0.9448201, 1.540184e-06, 1)
 
 [node name="Board" type="Node3D" unique_id=660102117]
 script = ExtResource("1_jnyf0")
+build_cell_scene = ExtResource("1_s78fa")
 
 [node name="Ground" type="MeshInstance3D" parent="." unique_id=1155033157]
 mesh = SubResource("BoxMesh_cetax")
 surface_material_override/0 = SubResource("StandardMaterial3D_cetax")
-
-[node name="BuildCell" parent="." unique_id=878998075 instance=ExtResource("1_s78fa")]
