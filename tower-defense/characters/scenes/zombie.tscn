@@ -1,7 +1,19 @@
 [gd_scene format=3 uid="uid://b2cueqo65qdqf"]
 
 [ext_resource type="PackedScene" uid="uid://byojdtlpbcobh" path="res://characters/enemies/Zombie.1.glb" id="1_o3umk"]
+[ext_resource type="Script" uid="uid://crt01tpe0nfq4" path="res://characters/scenes/zombie.gd" id="1_x8xl5"]
+[ext_resource type="PackedScene" uid="uid://dx1rlujdsx5w6" path="res://characters/scenes/murcielago.tscn" id="3_qq26m"]
 
 [node name="Node3D" type="Node3D" unique_id=234517084]
+script = ExtResource("1_x8xl5")
 
 [node name="Zombie_1" parent="." unique_id=1830157562 instance=ExtResource("1_o3umk")]
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=443701228]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28630543, 1.8191481, 3.3920739)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=217166076]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7662623, 1.931016, 0)
+
+[node name="Murcielago2_0" parent="." unique_id=1227900863 instance=ExtResource("3_qq26m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.244107, 1.0488615, -4.753681)
