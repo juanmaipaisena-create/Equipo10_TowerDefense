@@ -9,9 +9,18 @@ albedo_color = Color(0.08034416, 0.75385183, 0.14083114, 1)
 material = SubResource("StandardMaterial3D_mw8bo")
 size = Vector3(1.4, 0.05, 1.4)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ohe1v"]
+size = Vector3(1, 0.14355469, 1)
+
 [node name="BuildCell" type="Node3D" unique_id=878998075]
 script = ExtResource("1_ohe1v")
 
 [node name="Mesh" type="MeshInstance3D" parent="." unique_id=1589507357]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.75, 0.2, -2.25)
 mesh = SubResource("BoxMesh_mw8bo")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1211595947]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0.41362548, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1011354646]
+transform = Transform3D(1.5, 0, 0, 0, 0.3, 0, 0, 0, 1.5, 0, -0.42822266, 0)
+shape = SubResource("BoxShape3D_ohe1v")
