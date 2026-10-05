@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bd25k84t4hgfq"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_1mii1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_o1wqe"]
+
+[node name="subdito" type="CharacterBody3D" unique_id=1971865224]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2089140075]
+mesh = SubResource("SphereMesh_1mii1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1606524424]
+shape = SubResource("SphereShape3D_o1wqe")

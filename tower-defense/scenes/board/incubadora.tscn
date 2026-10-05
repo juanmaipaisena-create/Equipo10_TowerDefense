@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://iokelrhtby15" path="res://scripts/board/incubadora.gd" id="1_h08qo"]
 [ext_resource type="PackedScene" uid="uid://co2ait0a0cgt6" path="res://scenes/board/board.tscn" id="2_iphmx"]
 [ext_resource type="PackedScene" uid="uid://ga6xda8x2blo" path="res://scenes/board/BuildCell.tscn" id="3_6w46p"]
+[ext_resource type="PackedScene" uid="uid://c52lwlvtmel4o" path="res://HUDEconomia.tscn" id="4_iphmx"]
+[ext_resource type="Script" uid="uid://cko7iin2ybyu6" path="res://scripts/sangre_generator.gd" id="5_6w46p"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_bpdcn"]
 
@@ -48,6 +50,11 @@ build_cell_scene = ExtResource("3_6w46p")
 [node name="BuildCell" parent="ZonaSacrificio" index="1" unique_id=878998075]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7253914, 0, 0)
 visible = false
+
+[node name="hud_economia" parent="." unique_id=442484670 instance=ExtResource("4_iphmx")]
+
+[node name="SangreGenerator" type="Node" parent="." unique_id=1048009289]
+script = ExtResource("5_6w46p")
 
 [editable path="SlotsIncubadora"]
 [editable path="ZonaSacrificio"]
