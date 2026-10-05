@@ -1,8 +1,10 @@
 class_name BuildCell
 extends Node3D
+signal build_requested(cell: BuildCell)
 
 @export var normal_color: Color = Color(0.2, 0.7, 0.2)
 @export var hover_color: Color = Color(0.8, 0.9, 0.2)
+@export var occupied_color: Color = Color(0.15, 0.15, 0.15)
 
 @onready var mesh: MeshInstance3D = $Mesh
 
@@ -25,3 +27,16 @@ func _on_area_3d_mouse_exited() -> void:
 
 func can_build() -> bool:
 	return not occupied
+
+
+func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	#solo necesitamos event
+	if event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && event.pressed && can_build():
+		if can_build():
+			print("Podemos construir aquí")
+			build_requested.emit(self)
+	else:
+		print("Esta celda está ocupada")
+
+func set_occupied(value: bool) -> void:
+	occupied = value
