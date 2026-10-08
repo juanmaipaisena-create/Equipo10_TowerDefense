@@ -2,9 +2,9 @@ class_name Incubadora
 extends Node3D
 
 @export var subdito_scene: PackedScene
-@export var subdito_combinado: PackedScene
+@export var subdito_combinado_scene: PackedScene
 @export var intervalo_generacion: float = 5.0
-@export var costo_sangre_combinar: int = 1
+@export var costo_sangre_combinar: int = 10
 
 @onready var camera: Camera3D = $Camera3D
 @onready var slots: Board = $SlotsIncubadora
@@ -22,6 +22,9 @@ func _ready() -> void:
 	timer_generacion.timeout.connect(_on_timer_generacion_timeout)
 	_on_timer_generacion_timeout()
 	timer_generacion.start()
+
+	ResourceManager.resource_changed.connect(_on_resource_changed)
+	_actualizar_resaltado_sacrificio(ResourceManager.get_amount("sangre"))
 
 
 func apuntar_camara() -> void:
@@ -100,8 +103,17 @@ func _process(_delta: float) -> void:
 	if punto != null:
 		subdito_arrastrado.global_position = punto
 
-
+#arrastrar als subdito a la parte de sacrificio y usar z para generar monedas
 func _unhandled_input(event: InputEvent) -> void:
+
+	if event is InputEventKey and event.pressed and event.keycode == KEY_Z:
+		ResourceManager.add("sangre", 5)
+
+	if subdito_arrastrado == null:
+		return
+
+	if event is InputEventMouseButton and not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		_soltar_subdito()
 	if subdito_arrastrado == null:
 		return
 
@@ -173,7 +185,19 @@ func _intentar_combinar(celda: BuildCell) -> void:
 	celda.occupied = false
 	celda.placed_tower = null
 
-	var combinado := subdito_combinado.instantiate() as SubditoCombinado
+	var combinado := subdito_combinado_scene.instantiate() as SubditoCombinado
 	celda.add_child(combinado)
 	combinado.position = Vector3(0, 0.5, 0)
 	celda.set_tower(combinado)
+
+
+func _on_resource_changed(id: String, new_amount: int) -> void:
+	if id == "sangre":
+		_actualizar_resaltado_sacrificio(new_amount)
+
+
+func _actualizar_resaltado_sacrificio(cantidad_sangre: int) -> void:
+	var activo := cantidad_sangre >= costo_sangre_combinar
+	for cell in sacrificio.get_children():
+		if cell is BuildCell:
+			cell.resaltar(activo)

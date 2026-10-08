@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://iokelrhtby15" path="res://scripts/board/incubadora.gd" id="1_h08qo"]
 [ext_resource type="PackedScene" uid="uid://co2ait0a0cgt6" path="res://scenes/board/board.tscn" id="2_iphmx"]
-[ext_resource type="PackedScene" uid="uid://bd25k84t4hgfq" path="res://subdito.tscn" id="2_xjdbw"]
-[ext_resource type="PackedScene" uid="uid://q8b4yysf5flq" path="res://subdito_combinado.tscn" id="3_4efvg"]
+[ext_resource type="PackedScene" uid="uid://bd25k84t4hgfq" path="res://scenes/Subditos/subdito.tscn" id="2_xjdbw"]
+[ext_resource type="PackedScene" uid="uid://q8b4yysf5flq" path="res://scenes/Subditos/subdito_combinado.tscn" id="3_4efvg"]
 [ext_resource type="PackedScene" uid="uid://ga6xda8x2blo" path="res://scenes/board/BuildCell.tscn" id="3_6w46p"]
 [ext_resource type="PackedScene" uid="uid://c52lwlvtmel4o" path="res://HUDEconomia.tscn" id="4_iphmx"]
-[ext_resource type="Script" uid="uid://cko7iin2ybyu6" path="res://scripts/sangre_generator.gd" id="5_6w46p"]
+[ext_resource type="Script" uid="uid://cko7iin2ybyu6" path="res://scripts/Managers/sangre_generator.gd" id="5_6w46p"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_bpdcn"]
 
@@ -19,7 +19,7 @@ albedo_color = Color(0.55152947, 0.9703906, 0.5797178, 1)
 [node name="Incubadora" type="Node3D" unique_id=1940757163]
 script = ExtResource("1_h08qo")
 subdito_scene = ExtResource("2_xjdbw")
-subdito_combinado = ExtResource("3_4efvg")
+subdito_combinado_scene = ExtResource("3_4efvg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1440860066]
 transform = Transform3D(33.55308, 0, 0, 0, 0.20601755, 0, 0, 0, 17.00594, 0, 0, 0)
