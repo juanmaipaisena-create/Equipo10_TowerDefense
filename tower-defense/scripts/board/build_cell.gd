@@ -26,13 +26,19 @@ func _ready() -> void:
 func _on_input_event(_camera: Node, event: InputEvent, _pos: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		cell_clicked.emit(self)
+
 func _on_area_3d_mouse_entered() -> void:
 	print("Mouse sobre BuildCell")
+	if occupied:
+		return
 	mesh.material_override.albedo_color = hover_color
 
 
 func _on_area_3d_mouse_exited() -> void:
-	mesh.material_override.albedo_color = normal_color
+	if occupied:
+		mesh.material_override.albedo_color = occupied_color
+	else:
+		mesh.material_override.albedo_color = normal_color
 
 
 
@@ -63,3 +69,7 @@ func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Ve
 
 func set_occupied(value: bool) -> void:
 	occupied = value
+	if occupied:
+		mesh.material_override.albedo_color = occupied_color
+	else:
+		mesh.material_override.albedo_color = normal_color

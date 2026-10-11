@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://codbseap35el6"]
+
+[ext_resource type="Script" uid="uid://uuivwq7dtt5o" path="res://scripts/enemy/enemy.gd" id="1_sjakr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xu5e0"]
+albedo_color = Color(0.2789542, 0.27484298, 0.007563892, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xu5e0"]
+material = SubResource("StandardMaterial3D_xu5e0")
+radius = 0.3
+height = 1.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sjakr"]
+albedo_color = Color(0.8868919, 0.85448754, 0.08047388, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_xu5e0"]
+material = SubResource("StandardMaterial3D_sjakr")
+radius = 0.25
+height = 0.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xu5e0"]
+radius = 0.3
+height = 1.8
+
+[node name="Enemy" type="CharacterBody3D" unique_id=1725855481]
+script = ExtResource("1_sjakr")
+
+[node name="Body" type="MeshInstance3D" parent="." unique_id=639149633]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+mesh = SubResource("CapsuleMesh_xu5e0")
+
+[node name="Head" type="MeshInstance3D" parent="." unique_id=2049405065]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
+mesh = SubResource("SphereMesh_xu5e0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1316387081]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_xu5e0")
