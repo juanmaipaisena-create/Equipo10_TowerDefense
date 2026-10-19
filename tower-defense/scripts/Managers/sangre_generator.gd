@@ -24,12 +24,12 @@ func _on_timeout() -> void:
 	sangre_generada.emit(cantidad_por_tick)
 
 
-#Segundos que faltan para la próxima moneda (sirve para una barra o cuenta regresiva en el HUD).
+
 func tiempo_restante() -> float:
 	return _timer.time_left
 
 
-#Pausar/reanudar la generación (ejemplo, al abrir un menú de pausa).
+
 func pausar() -> void:
 	_timer.paused = true
 

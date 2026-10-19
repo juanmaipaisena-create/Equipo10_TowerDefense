@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://co2ait0a0cgt6" path="res://scenes/board/board.tscn" id="2_iphmx"]
 [ext_resource type="PackedScene" uid="uid://bd25k84t4hgfq" path="res://scenes/Subditos/subdito.tscn" id="2_xjdbw"]
 [ext_resource type="PackedScene" uid="uid://q8b4yysf5flq" path="res://scenes/Subditos/subdito_combinado.tscn" id="3_4efvg"]
-[ext_resource type="PackedScene" uid="uid://ga6xda8x2blo" path="res://scenes/board/BuildCell.tscn" id="3_6w46p"]
 [ext_resource type="PackedScene" uid="uid://c52lwlvtmel4o" path="res://HUDEconomia.tscn" id="4_iphmx"]
 [ext_resource type="Script" uid="uid://cko7iin2ybyu6" path="res://scripts/Managers/sangre_generator.gd" id="5_6w46p"]
 
@@ -36,24 +35,17 @@ environment = SubResource("Environment_h08qo")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.341939, 0, 0)
 rows = 2
 columns = 3
-build_cell_scene = ExtResource("3_6w46p")
+tower_scene = null
 
 [node name="Ground" parent="SlotsIncubadora" index="0" unique_id=1155033157]
 transform = Transform3D(0.83361095, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="BuildCell" parent="SlotsIncubadora" index="1" unique_id=878998075]
-visible = false
 
 [node name="ZonaSacrificio" parent="." unique_id=2002326782 instance=ExtResource("2_iphmx")]
 transform = Transform3D(-0.8593431, 0, 0.006918092, 0, 1, 0, -0.0059393835, 0, -1.0009481, 5.016942, 0, 0)
 rows = 2
 columns = 1
 cell_size = 2.0
-build_cell_scene = ExtResource("3_6w46p")
-
-[node name="BuildCell" parent="ZonaSacrificio" index="1" unique_id=878998075]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7253914, 0, 0)
-visible = false
+tower_scene = null
 
 [node name="hud_economia" parent="." unique_id=442484670 instance=ExtResource("4_iphmx")]
 

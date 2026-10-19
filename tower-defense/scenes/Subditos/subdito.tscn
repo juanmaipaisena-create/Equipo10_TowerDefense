@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bd25k84t4hgfq"]
 
 [ext_resource type="Script" uid="uid://12c6pch2272u" path="res://subdito.gd" id="1_o1wqe"]
+[ext_resource type="PackedScene" uid="uid://dfn6ho0hqg6da" path="res://characters/esbirros/Murcielago2.0.glb" id="2_mc86s"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_1mii1"]
 
@@ -10,7 +11,14 @@
 script = ExtResource("1_o1wqe")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2089140075]
+visible = false
 mesh = SubResource("SphereMesh_1mii1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1606524424]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41269064, 0)
 shape = SubResource("SphereShape3D_o1wqe")
+
+[node name="Murcielago2_0" parent="." unique_id=355011730 instance=ExtResource("2_mc86s")]
+
+[connection signal="died" from="." to="." method="_on_died"]
+[connection signal="subdito_pressed" from="." to="." method="_on_subdito_pressed"]

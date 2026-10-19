@@ -20,7 +20,7 @@ func _refresh(amount: int) -> void:
 	text = "%s%d" % [prefix, amount]
 
 
-#respuestq visual cuando no alcanza el recurso: el texto parpadea en rojo.
+
 func _on_spend_failed(id: String, _required: int, _current: int) -> void:
 	if id != resource_id:
 		return
