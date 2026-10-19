@@ -5,6 +5,7 @@ extends Node3D
 @export var subdito_combinado_scene: PackedScene
 @export var intervalo_generacion: float = 5.0
 @export var costo_sangre_combinar: int = 10
+@export var radio_soltar_torre: float = 1.0   # NUEVO: qué tan cerca de una torre hay que soltar el combinado
 
 @onready var camera: Camera3D = $Camera3D
 @onready var slots: Board = $SlotsIncubadora
@@ -13,6 +14,8 @@ extends Node3D
 
 var subdito_arrastrado: Subdito = null
 var celda_origen: BuildCell = null
+var combinado_arrastrado: SubditoCombinado = null   # NUEVO
+var celda_origen_combinado: BuildCell = null        # NUEVO
 
 
 func _ready() -> void:
@@ -79,7 +82,7 @@ func _on_sacrificio_clicked(cell: BuildCell) -> void:
 
 
 func _on_subdito_pressed(subdito: Subdito) -> void:
-	if subdito_arrastrado != null:
+	if subdito_arrastrado != null or combinado_arrastrado != null:
 		return
 
 	subdito_arrastrado = subdito
@@ -90,35 +93,56 @@ func _on_subdito_pressed(subdito: Subdito) -> void:
 	subdito.reparent(self, true)
 
 
+# NUEVO: lo mismo que _on_subdito_pressed, pero para el combinado
+func _on_combinado_pressed(combinado: SubditoCombinado) -> void:
+	if combinado_arrastrado != null or subdito_arrastrado != null:
+		return
+	if combinado.celda_actual == null:   # ya está montado en una torre
+		return
+
+	combinado_arrastrado = combinado
+	celda_origen_combinado = combinado.celda_actual
+	celda_origen_combinado.occupied = false
+	celda_origen_combinado.placed_tower = null
+
+	combinado.reparent(self, true)
+
+
+func _camara_activa() -> Camera3D:
+	return get_viewport().get_camera_3d()
+
+
+# CAMBIÓ: mueve al súbdito o al combinado, el que esté arrastrando
 func _process(_delta: float) -> void:
-	if subdito_arrastrado == null:
+	var arrastrado: Node3D = subdito_arrastrado if subdito_arrastrado != null else combinado_arrastrado
+	if arrastrado == null:
 		return
 
 	var mouse_pos := get_viewport().get_mouse_position()
-	var origen := camera.project_ray_origin(mouse_pos)
-	var direccion := camera.project_ray_normal(mouse_pos)
-	var plano := Plane(Vector3.UP, subdito_arrastrado.global_position.y)
+	var camara := _camara_activa()
+	var origen := camara.project_ray_origin(mouse_pos)
+	var direccion := camara.project_ray_normal(mouse_pos)
+	var plano := Plane(Vector3.UP, arrastrado.global_position.y)
 	var punto = plano.intersects_ray(origen, direccion)
 
 	if punto != null:
-		subdito_arrastrado.global_position = punto
+		arrastrado.global_position = punto
 
-#arrastrar als subdito a la parte de sacrificio y usar z para generar monedas
+
+# arrastrar a los súbditos a la parte de sacrificio y usar Z para generar monedas
+# CAMBIÓ: un solo bloque de "soltar", que decide según qué se esté arrastrando
 func _unhandled_input(event: InputEvent) -> void:
-
 	if event is InputEventKey and event.pressed and event.keycode == KEY_Z:
 		ResourceManager.add("sangre", 5)
 
-	if subdito_arrastrado == null:
+	var soltar: bool = event is InputEventMouseButton and not event.pressed and event.button_index == MOUSE_BUTTON_LEFT
+	if not soltar:
 		return
 
-	if event is InputEventMouseButton and not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+	if subdito_arrastrado != null:
 		_soltar_subdito()
-	if subdito_arrastrado == null:
-		return
-
-	if event is InputEventMouseButton and not event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		_soltar_subdito()
+	elif combinado_arrastrado != null:
+		_soltar_combinado()
 
 
 func _soltar_subdito() -> void:
@@ -137,10 +161,45 @@ func _soltar_subdito() -> void:
 	celda_origen = null
 
 
+# NUEVO: suelta el combinado cerca de una torre (queda montado) o lo devuelve a su celda
+func _soltar_combinado() -> void:
+	var torre := _torre_cercana(combinado_arrastrado.global_position)
+
+	if torre == null:
+		_devolver_combinado_a_origen()
+	else:
+		combinado_arrastrado.reparent(torre, true)
+		combinado_arrastrado.position = Vector3(0, 1.0, 0)   # encima de la torre
+		combinado_arrastrado.celda_actual = null
+
+	combinado_arrastrado = null
+	celda_origen_combinado = null
+
+
+# NUEVO: la torre más cercana al punto (mirando solo X y Z), dentro de radio_soltar_torre
+func _torre_cercana(punto: Vector3) -> Tower:
+	var mejor: Tower = null
+	var mejor_distancia := radio_soltar_torre
+	var punto_plano := Vector2(punto.x, punto.z)
+
+	for nodo in get_tree().root.find_children("*", "Node3D", true, false):
+		var torre := nodo as Tower
+		if torre == null:
+			continue
+		var distancia := Vector2(torre.global_position.x, torre.global_position.z).distance_to(punto_plano)
+		if distancia < mejor_distancia:
+			mejor = torre
+			mejor_distancia = distancia
+
+	return mejor
+
+
+# CAMBIÓ: usa la cámara activa
 func _celda_bajo_mouse(board: Board) -> BuildCell:
 	var mouse_pos := get_viewport().get_mouse_position()
-	var origen := camera.project_ray_origin(mouse_pos)
-	var direccion := camera.project_ray_normal(mouse_pos) * 100.0
+	var camara := _camara_activa()
+	var origen := camara.project_ray_origin(mouse_pos)
+	var direccion := camara.project_ray_normal(mouse_pos) * 100.0
 
 	var espacio := get_world_3d().direct_space_state
 	var consulta := PhysicsRayQueryParameters3D.create(origen, origen + direccion)
@@ -166,6 +225,14 @@ func _devolver_a_origen() -> void:
 	subdito_arrastrado.celda_actual = celda_origen
 
 
+# NUEVO
+func _devolver_combinado_a_origen() -> void:
+	combinado_arrastrado.reparent(celda_origen_combinado, true)
+	combinado_arrastrado.position = Vector3(0, 0.5, 0)
+	celda_origen_combinado.set_tower(combinado_arrastrado)
+	combinado_arrastrado.celda_actual = celda_origen_combinado
+
+
 func _colocar_en_celda(subdito: Subdito, celda: BuildCell) -> void:
 	subdito.reparent(celda, true)
 	subdito.position = Vector3(0, 0.5, 0)
@@ -189,6 +256,8 @@ func _intentar_combinar(celda: BuildCell) -> void:
 	celda.add_child(combinado)
 	combinado.position = Vector3(0, 0.5, 0)
 	celda.set_tower(combinado)
+	combinado.celda_actual = celda                                   # NUEVO
+	combinado.combinado_pressed.connect(_on_combinado_pressed)       # NUEVO
 
 
 func _on_resource_changed(id: String, new_amount: int) -> void:
