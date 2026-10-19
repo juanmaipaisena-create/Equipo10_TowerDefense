@@ -15,4 +15,5 @@ mesh = SubResource("BoxMesh_gt4s0")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=637394362]
 shape = SubResource("BoxShape3D_nwyaf")
 
+[connection signal="combinado_pressed" from="." to="." method="_on_combinado_pressed"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]

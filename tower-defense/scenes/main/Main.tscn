@@ -8,6 +8,7 @@
 
 [node name="Board" parent="." unique_id=10308936 instance=ExtResource("1_u1xfj")]
 enemy_scene = ExtResource("2_nha0i")
+campo_de_batalla = true
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=188035008]
 transform = Transform3D(0.9766196, 0.10327129, -0.18854523, 0.08913185, 0.6035997, 0.7922896, 0.19562662, -0.7905709, 0.5802825, -1, 7, 7)

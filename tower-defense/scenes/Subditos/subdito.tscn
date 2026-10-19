@@ -19,3 +19,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41269064, 0)
 shape = SubResource("SphereShape3D_o1wqe")
 
 [node name="Murcielago2_0" parent="." unique_id=355011730 instance=ExtResource("2_mc86s")]
+
+[connection signal="died" from="." to="." method="_on_died"]
+[connection signal="subdito_pressed" from="." to="." method="_on_subdito_pressed"]
