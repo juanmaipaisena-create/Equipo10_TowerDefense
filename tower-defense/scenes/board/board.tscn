@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dttnc1lejx1ln" path="res://scripts/board/board.gd" id="1_jnyf0"]
 [ext_resource type="PackedScene" uid="uid://ga6xda8x2blo" path="res://scenes/board/BuildCell.tscn" id="1_s78fa"]
 [ext_resource type="PackedScene" uid="uid://dmtbdtxiipump" path="res://scenes/tower/Tower.tscn" id="3_knosr"]
+[ext_resource type="PackedScene" uid="uid://codbseap35el6" path="res://scenes/enemy/Enemy.tscn" id="4_q07he"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_cetax"]
 size = Vector3(12, 0.3, 8)
@@ -14,6 +15,7 @@ albedo_color = Color(0.8590551, 0.9448201, 1.540184e-06, 1)
 script = ExtResource("1_jnyf0")
 build_cell_scene = ExtResource("1_s78fa")
 tower_scene = ExtResource("3_knosr")
+enemy_scene = ExtResource("4_q07he")
 
 [node name="Ground" type="MeshInstance3D" parent="." unique_id=1155033157]
 mesh = SubResource("BoxMesh_cetax")
