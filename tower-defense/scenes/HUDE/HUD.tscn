@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://3g63872lf1cf"]
+
+[ext_resource type="Script" uid="uid://dcmna4j8iuhqm" path="res://scenes/HUDE/hud.gd" id="1_m10ay"]
+
+[node name="Hud" type="CanvasLayer" unique_id=670798985]
+script = ExtResource("1_m10ay")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1646293534]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 140.0
+grow_horizontal = 0
+
+[node name="VBox" type="VBoxContainer" parent="Panel" unique_id=291178159]
+layout_mode = 2
+
+[node name="MoneyLabel" type="Label" parent="Panel/VBox" unique_id=525554921]
+layout_mode = 2
+
+[node name="BloodLabel" type="Label" parent="Panel/VBox" unique_id=2073217220]
+layout_mode = 2
+
+[node name="WaveLabel" type="Label" parent="Panel/VBox" unique_id=1728516189]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="Panel/VBox" unique_id=1604602488]
+layout_mode = 2
+
+[node name="BuildButton" type="Button" parent="Panel/VBox" unique_id=639341408]
+layout_mode = 2
+
+[node name="PauseButton" type="Button" parent="Panel/VBox" unique_id=1031741145]
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="Panel/VBox" unique_id=512818003]
+layout_mode = 2

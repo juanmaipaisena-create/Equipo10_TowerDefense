@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://bpdp62wmijf4h"]
 
+[ext_resource type="Script" uid="uid://c6ni4jclc8pm7" path="res://scenes/main/main.gd" id="1_q24mn"]
 [ext_resource type="PackedScene" uid="uid://co2ait0a0cgt6" path="res://scenes/board/board.tscn" id="1_u1xfj"]
-[ext_resource type="PackedScene" uid="uid://codbseap35el6" path="res://scenes/enemy/Enemy.tscn" id="2_nha0i"]
 [ext_resource type="PackedScene" uid="uid://be122exeopc3p" path="res://scenes/board/incubadora.tscn" id="3_q24mn"]
+[ext_resource type="PackedScene" uid="uid://3g63872lf1cf" path="res://scenes/HUDE/HUD.tscn" id="4_gyg6b"]
 
 [node name="Main" type="Node3D" unique_id=1386430368]
+script = ExtResource("1_q24mn")
 
 [node name="Board" parent="." unique_id=10308936 instance=ExtResource("1_u1xfj")]
-enemy_scene = ExtResource("2_nha0i")
 campo_de_batalla = true
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=188035008]
@@ -17,5 +18,7 @@ transform = Transform3D(0.9766196, 0.10327129, -0.18854523, 0.08913185, 0.603599
 
 [node name="Incubadora" parent="." unique_id=1940757163 instance=ExtResource("3_q24mn")]
 transform = Transform3D(1, 0, 0, 0, 0.9988459, -0.04803043, 0, 0.04803043, 0.9988459, -3.8256369, 0, -8.080933)
+
+[node name="HUD" parent="." unique_id=670798985 instance=ExtResource("4_gyg6b")]
 
 [editable path="Board"]

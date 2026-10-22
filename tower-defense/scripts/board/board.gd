@@ -11,6 +11,7 @@ extends Node3D
 @export var intervalo_zombies: float = 3.0
 @export var x_aparicion: float = 8.0
 @export var x_meta: float = -8.0
+@export var tower_cost: int = 50
 
 
 var dragged_entity: Node3D = null
@@ -44,25 +45,38 @@ func create_cell(row: int, column: int) -> void:
 	cell.position = Vector3(x, 0.2, z)
 
 func _on_cell_build_requested(cell: BuildCell) -> void:
+	if GameManager.game_over:
+		return
+	if not GameManager.build_mode:
+		return
 	if not cell.can_build():
 		return
-		
-	build_tower(cell)
+	if tower_scene == null:
+		push_error("Board: no hay una Tower Scene asignada")
+		return
+	if not GameManager.can_afford(tower_cost):
+		GameManager.status_changed.emit("No tienes monedas suficientes")
+		return
+	if GameManager.spend_money(tower_cost):
+		build_tower(cell)
 
 func build_tower(cell: BuildCell) -> void:
 	if tower_scene == null:
 		return
-	var tower := tower_scene.instantiate()
+
+	var tower := tower_scene.instantiate() as Node3D
+	if tower == null:
+		push_error("No se pudo instanciar la torre")
+		return
+
 	add_child(tower)
 	tower.global_position = cell.global_position
 	tower.set("celda_actual", cell)
-	
 	if tower.has_signal("subdito_pressed"):
 		tower.subdito_pressed.connect(_on_entity_pressed)
 	elif tower.has_signal("combinado_pressed"):
 		tower.combinado_pressed.connect(_on_entity_pressed)
-	
-	cell.set_occupied(true)
+	cell.set_tower(tower)
 
 func _on_entity_pressed(entity: Node3D) -> void:
 	dragged_entity = entity
@@ -119,11 +133,25 @@ func _mover_a_celda(entity: Node3D, target_cell: BuildCell) -> void:
 func intentar_combinar_subdito(target_cell: BuildCell, entity: Node3D, origin_cell: BuildCell) -> void:
 	entity.global_position = drag_start_position
 
-func spawn_zombie() -> void:
-	var fila := randi() % rows
-	var z := (fila - (rows - 1) / 2.0) * cell_size
 
+func spawn_zombie() -> Enemy:
+	if enemy_scene == null:
+		push_error("Board: asigna Enemy Scene en el Inspector")
+		return null
+	if rows <= 0:
+		push_error("Board: rows debe ser mayor que cero")
+		return null
+	var fila: int = randi_range(0, rows - 1)
+	var z: float = (fila - (rows - 1) / 2.0) * cell_size
 	var enemy := enemy_scene.instantiate() as Enemy
+	if enemy == null:
+		push_error("Board: Enemy Scene no tiene el script Enemy")
+		return null
 	add_child(enemy)
-	enemy.global_position = to_global(Vector3(x_aparicion, 0.0, z))
-	enemy.target_position = to_global(Vector3(x_meta, 0.0, z))
+	enemy.global_position = to_global(
+		Vector3(x_aparicion, 0.0, z)
+	)
+	enemy.target_position = to_global(
+		Vector3(x_meta, 0.0, z)
+	)
+	return enemy
