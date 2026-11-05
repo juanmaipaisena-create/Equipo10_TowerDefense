@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 ResourceManager="*uid://chx62n147snx2"
-GameManager="*uid://cwmg4vb50prk4"
 
 [physics]
 
