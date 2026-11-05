@@ -49,6 +49,7 @@ func _process(delta: float) -> void:
 		intermission_timer = time_between_waves
 		GameManager.status_changed.emit("Oleada completada")
 
+
 func start_wave(index: int) -> void:
 	if GameManager.game_over:
 		return

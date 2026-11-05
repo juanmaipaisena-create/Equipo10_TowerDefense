@@ -9,10 +9,16 @@
 script = ExtResource("1_q24mn")
 
 [node name="Board" parent="." unique_id=10308936 instance=ExtResource("1_u1xfj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.19057846, 1.0644293)
 campo_de_batalla = true
+tower_cost = 20
+escena_derrota = "uid://dvkjp83lwx5cj"
+
+[node name="Ground" parent="Board" index="0" unique_id=1155033157]
+transform = Transform3D(0.99995, 0.010000572, 0, -0.010000572, 0.99995, 0, 0, 0, 1, 0, 0, -0.54479504)
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=188035008]
-transform = Transform3D(0.9766196, 0.10327129, -0.18854523, 0.08913185, 0.6035997, 0.7922896, 0.19562662, -0.7905709, 0.5802825, -1, 7, 7)
+transform = Transform3D(0.94021076, 0.19901836, -0.27639723, 0.008961238, 0.79678136, 0.6042013, 0.34047532, -0.5705535, 0.74735904, -3.9279842, 7, 8.620843)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1652456119]
 

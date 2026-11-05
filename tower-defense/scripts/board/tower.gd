@@ -49,7 +49,7 @@ func _find_enemy() -> Enemy:
 
 		var distance := global_position.distance_to(enemy.global_position)
 
-		# Solo atacamos enemigos aproximadamente a la misma altura.
+		
 		if abs(enemy.global_position.y - global_position.y) > 2.0:
 			continue
 

@@ -1,18 +1,24 @@
 [gd_scene format=3 uid="uid://q8b4yysf5flq"]
 
 [ext_resource type="Script" uid="uid://ks2uifhk5f8c" path="res://subdito_combinado.gd" id="1_nwyaf"]
+[ext_resource type="PackedScene" uid="uid://cu1hgsxsbopqr" path="res://characters/esbirros/Duende.glb" id="2_isvt4"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_gt4s0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nwyaf"]
+size = Vector3(1.4799805, 2.7021484, 1)
 
 [node name="subdito_combinado" type="CharacterBody3D" unique_id=1583036167]
 script = ExtResource("1_nwyaf")
 
+[node name="Duende" parent="." unique_id=480791484 instance=ExtResource("2_isvt4")]
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=271072242]
+visible = false
 mesh = SubResource("BoxMesh_gt4s0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=637394362]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23999023, 0.8510742, 0)
 shape = SubResource("BoxShape3D_nwyaf")
 
 [connection signal="combinado_pressed" from="." to="." method="_on_combinado_pressed"]

@@ -2,7 +2,7 @@ extends Node
 signal sangre_generada(cantidad: int)
 
 @export var resource_id: String = "subditos"
-@export var intervalo: float = 5.0
+@export var intervalo: float = 3.0
 @export var cantidad_por_tick: int = 1
 @export var iniciar_automaticamente: bool = true
 
