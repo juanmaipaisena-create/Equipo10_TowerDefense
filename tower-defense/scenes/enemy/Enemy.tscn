@@ -25,6 +25,7 @@ height = 2.951758
 
 [node name="Enemy" type="CharacterBody3D" unique_id=1725855481]
 script = ExtResource("1_sjakr")
+max_health = 10.0
 
 [node name="Body" type="MeshInstance3D" parent="." unique_id=639149633]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)

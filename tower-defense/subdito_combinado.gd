@@ -10,6 +10,8 @@ signal died
 @export var attack_range: float = 1.8
 @export var attack_cooldown: float = 1.0
 
+@onready var anim: AnimationPlayer = find_child("AnimationPlayer", true, false)
+
 var celda_actual: BuildCell = null
 var current_health: float
 var en_combate: bool = false
@@ -19,7 +21,10 @@ var _cooldown: float = 0.0
 func _ready() -> void:
 	input_event.connect(_on_input_event)
 	current_health = max_health
-
+	if anim:
+		anim.get_animation("Idle_Duende").loop_mode = Animation.LOOP_LINEAR
+		anim.get_animation("Run_Duende").loop_mode = Animation.LOOP_LINEAR
+		anim.play("Idle_Duende")
 
 func _on_input_event(_camera: Node, event: InputEvent, _pos: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:

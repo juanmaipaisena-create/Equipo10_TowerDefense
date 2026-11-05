@@ -3,7 +3,7 @@ extends Node3D
 
 @export var subdito_scene: PackedScene
 @export var subdito_combinado_scene: PackedScene
-@export var intervalo_generacion: float = 5.0
+@export var intervalo_generacion: float = 3.0
 @export var costo_sangre_combinar: int = 10
 @export var radio_soltar_torre: float = 1.0   
 

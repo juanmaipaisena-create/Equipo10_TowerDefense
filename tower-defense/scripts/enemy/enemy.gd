@@ -1,6 +1,7 @@
 class_name Enemy
 extends CharacterBody3D
 
+signal llego_a_meta
 signal died
 
 @export var move_speed: float = 0.5
@@ -42,23 +43,18 @@ func _physics_process(delta: float) -> void:
 			_cooldown = attack_cooldown
 		return
 
-	
 	var direction: Vector3 = target_position - global_position
 	var distance: float = direction.length()
 	direction.y = 0.0
 
 	if distance <= stopping_distance:
-		velocity = Vector3.ZERO
-		move_and_slide()
-		_reproducir("idle_esqueleto")
+		_llegar_a_meta()
 		return
 
 	look_at(global_position + direction, Vector3.UP)
 	velocity = direction.normalized() * move_speed
 	move_and_slide()
 	_reproducir("caminar-esqueleto")
-
-
 
 func _defensor_en_rango() -> Node3D:
 	var mejor: Node3D = null
@@ -93,4 +89,11 @@ func die() -> void:
 	_muerto = true
 	ResourceManager.add("sangre", sangre_al_morir)
 	died.emit()
+	queue_free()
+	
+func _llegar_a_meta() -> void:
+	if _muerto:
+		return
+	_muerto = true
+	llego_a_meta.emit()
 	queue_free()

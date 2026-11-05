@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b7f5xdtt3xb4k"]
+
+[ext_resource type="PackedScene" uid="uid://c7av3ujwqg70f" path="res://characters/enemies/Fantasma.glb" id="1_s3l65"]
+
+[node name="Node3D" type="Node3D" unique_id=1921622771]
+
+[node name="Fantasma" parent="." unique_id=1570394435 instance=ExtResource("1_s3l65")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.11277366, 0, -0.44861627)
