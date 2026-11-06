@@ -5,7 +5,8 @@ signal spend_failed(resource_id: String, required: int, current: int)
 
 
 var _resources: Dictionary = {
-	"sangre": 0,
+	"monedas": 150,
+	"sangre": 10,
 	"subditos": 0,
 }
 
@@ -31,6 +32,10 @@ func add(resource_id: String, amount: int) -> void:
 	if amount <= 0:
 		return
 	_set_amount(resource_id, get_amount(resource_id) + amount)
+
+
+func set_amount(resource_id: String, value: int) -> void:
+	_set_amount(resource_id, value)
 
 
 

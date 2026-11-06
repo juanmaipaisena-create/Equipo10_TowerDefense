@@ -1,4 +1,3 @@
-
 extends CanvasLayer
 
 var main_node: Node3D
@@ -21,14 +20,13 @@ func _ready() -> void:
 	pause_button.pressed.connect(_on_pause_pressed)
 	restart_button.pressed.connect(_on_restart_pressed)
 
-	GameManager.money_changed.connect(_on_money_changed)
-	GameManager.blood_changed.connect(_on_blood_changed)
+	ResourceManager.resource_changed.connect(_on_resource_changed)
 	GameManager.wave_changed.connect(_on_wave_changed)
 	GameManager.status_changed.connect(_on_status_changed)
 	GameManager.game_finished.connect(_on_game_finished)
 
-	_on_money_changed(GameManager.money)
-	_on_blood_changed(GameManager.base_health)
+	_on_resource_changed("monedas", ResourceManager.get_amount("monedas"))
+	_on_resource_changed("sangre", ResourceManager.get_amount("sangre"))
 	_on_wave_changed(GameManager.current_wave)
 
 
@@ -61,12 +59,12 @@ func _on_restart_pressed() -> void:
 		main_node.call("restart_game")
 
 
-func _on_money_changed(amount: int) -> void:
-	money_label.text = "Monedas: %d" % amount
-
-
-func _on_blood_changed(amount: int) -> void:
-	blood_label.text = "Base: %d" % amount
+func _on_resource_changed(id: String, amount: int) -> void:
+	match id:
+		"monedas":
+			money_label.text = "Monedas: %d" % amount
+		"sangre":
+			blood_label.text = "Base: %d" % amount
 
 
 func _on_wave_changed(wave: int) -> void:

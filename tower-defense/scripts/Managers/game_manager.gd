@@ -8,8 +8,19 @@ signal game_finished(won: bool)
 
 var starting_money: int = 150
 var starting_blood: int = 10
-var money: int = 150
-var base_health: int = 10
+
+var money: int:
+	get:
+		return ResourceManager.get_amount("monedas")
+	set(value):
+		ResourceManager.set_amount("monedas", value)
+
+var base_health: int:
+	get:
+		return ResourceManager.get_amount("sangre")
+	set(value):
+		ResourceManager.set_amount("sangre", value)
+
 var current_wave: int = 0
 var game_over: bool = false
 var paused: bool = false
@@ -43,7 +54,7 @@ func spend_money(amount: int) -> bool:
 	if amount < 0 or not can_afford(amount):
 		return false
 
-	money -= amount
+	ResourceManager.spend("monedas", amount)
 	money_changed.emit(money)
 	return true
 
@@ -52,7 +63,7 @@ func add_money(amount: int) -> void:
 	if game_over or amount <= 0:
 		return
 
-	money += amount
+	ResourceManager.add("monedas", amount)
 	money_changed.emit(money)
 
 
@@ -60,7 +71,7 @@ func add_blood(amount: int) -> void:
 	if game_over or amount <= 0:
 		return
 
-	base_health += amount
+	ResourceManager.add("sangre", amount)
 	blood_changed.emit(base_health)
 
 
@@ -68,7 +79,7 @@ func damage_base(amount: int) -> void:
 	if game_over or amount <= 0:
 		return
 
-	base_health = max(0, base_health - amount)
+	ResourceManager.spend("sangre", mini(amount, base_health))
 	blood_changed.emit(base_health)
 
 	if base_health <= 0:
