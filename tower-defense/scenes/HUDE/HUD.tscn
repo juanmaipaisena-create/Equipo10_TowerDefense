@@ -16,9 +16,6 @@ grow_horizontal = 0
 [node name="VBox" type="VBoxContainer" parent="Panel" unique_id=291178159]
 layout_mode = 2
 
-[node name="MoneyLabel" type="Label" parent="Panel/VBox" unique_id=525554921]
-layout_mode = 2
-
 [node name="BloodLabel" type="Label" parent="Panel/VBox" unique_id=2073217220]
 layout_mode = 2
 

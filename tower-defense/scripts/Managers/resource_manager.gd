@@ -64,3 +64,8 @@ func spend_many(costs: Dictionary) -> bool:
 func _set_amount(resource_id: String, value: int) -> void:
 	_resources[resource_id] = maxi(value, 0) 
 	resource_changed.emit(resource_id, _resources[resource_id])
+	
+	
+func reiniciar() -> void:
+	for id in _resources.keys():
+		_set_amount(id, 0)

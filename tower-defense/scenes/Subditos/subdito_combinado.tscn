@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://q8b4yysf5flq"]
 
 [ext_resource type="Script" uid="uid://ks2uifhk5f8c" path="res://subdito_combinado.gd" id="1_nwyaf"]
+[ext_resource type="PackedScene" uid="uid://cu1hgsxsbopqr" path="res://characters/esbirros/Duende.glb" id="2_isvt4"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_gt4s0"]
 
@@ -14,6 +15,8 @@ mesh = SubResource("BoxMesh_gt4s0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=637394362]
 shape = SubResource("BoxShape3D_nwyaf")
+
+[node name="Duende" parent="." unique_id=480791484 instance=ExtResource("2_isvt4")]
 
 [connection signal="combinado_pressed" from="." to="." method="_on_combinado_pressed"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]

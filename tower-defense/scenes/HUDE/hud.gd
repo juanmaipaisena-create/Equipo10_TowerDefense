@@ -61,10 +61,9 @@ func _on_restart_pressed() -> void:
 
 func _on_resource_changed(id: String, amount: int) -> void:
 	match id:
-		"monedas":
-			money_label.text = "Monedas: %d" % amount
+
 		"sangre":
-			blood_label.text = "Base: %d" % amount
+			blood_label.text = "Sangre: %d" % amount
 
 
 func _on_wave_changed(wave: int) -> void:
@@ -83,3 +82,7 @@ func _on_game_finished(won: bool) -> void:
 		status_label.text = "¡VICTORIA BIEN AHI!"
 	else:
 		status_label.text = "¡DERROTA MAL AHI!"
+		
+		
+func _on_money_changed(amount: int) -> void:
+	money_label.text = "Sangre: %d" % amount

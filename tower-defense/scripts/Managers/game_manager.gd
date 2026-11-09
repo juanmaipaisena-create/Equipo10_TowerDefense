@@ -8,31 +8,31 @@ signal game_finished(won: bool)
 
 var starting_money: int = 150
 var starting_blood: int = 10
-
-var money: int:
-	get:
-		return ResourceManager.get_amount("monedas")
-	set(value):
-		ResourceManager.set_amount("monedas", value)
-
-var base_health: int:
-	get:
-		return ResourceManager.get_amount("sangre")
-	set(value):
-		ResourceManager.set_amount("sangre", value)
-
+var base_health: int = 10
 var current_wave: int = 0
 var game_over: bool = false
 var paused: bool = false
 var build_mode: bool = true
 
+var money: int:
+	get:
+		return ResourceManager.get_amount("sangre")
+
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	ResourceManager.resource_changed.connect(_on_resource_changed)
+
+
+func _on_resource_changed(id: String, amount: int) -> void:
+	if id == "sangre":
+		money_changed.emit(amount)
 
 
 func reset_game() -> void:
 	build_mode = true
-	money = starting_money
+	ResourceManager.reiniciar()
+	ResourceManager.add("sangre", starting_money)
 	base_health = starting_blood
 	current_wave = 0
 	game_over = false
@@ -47,31 +47,26 @@ func reset_game() -> void:
 
 
 func can_afford(cost: int) -> bool:
-	return not game_over and money >= cost
+	return not game_over and ResourceManager.can_afford("sangre", cost)
 
 
 func spend_money(amount: int) -> bool:
 	if amount < 0 or not can_afford(amount):
 		return false
-
-	ResourceManager.spend("monedas", amount)
-	money_changed.emit(money)
-	return true
+	return ResourceManager.spend("sangre", amount)
 
 
 func add_money(amount: int) -> void:
 	if game_over or amount <= 0:
 		return
-
-	ResourceManager.add("monedas", amount)
-	money_changed.emit(money)
+	ResourceManager.add("sangre", amount)
 
 
 func add_blood(amount: int) -> void:
 	if game_over or amount <= 0:
 		return
 
-	ResourceManager.add("sangre", amount)
+	base_health += amount
 	blood_changed.emit(base_health)
 
 
@@ -79,7 +74,7 @@ func damage_base(amount: int) -> void:
 	if game_over or amount <= 0:
 		return
 
-	ResourceManager.spend("sangre", mini(amount, base_health))
+	base_health = max(0, base_health - amount)
 	blood_changed.emit(base_health)
 
 	if base_health <= 0:

@@ -25,6 +25,8 @@ func _ready() -> void:
 	timer_generacion.timeout.connect(_on_timer_generacion_timeout)
 	_on_timer_generacion_timeout()
 	timer_generacion.start()
+	add_to_group("incubadora")
+	apuntar_camara()
 
 	ResourceManager.resource_changed.connect(_on_resource_changed)
 	_actualizar_resaltado_sacrificio(ResourceManager.get_amount("sangre"))
@@ -284,6 +286,37 @@ func _intentar_combinar(celda: BuildCell) -> void:
 	combinado.celda_actual = celda
 	combinado.combinado_pressed.connect(_on_combinado_pressed)
 	print("  combinado creado")
+
+func combinar_en_sacrificio() -> String:
+	var celdas: Array[BuildCell] = []
+	for cell in sacrificio.get_children():
+		if cell is BuildCell and cell.placed_tower is Subdito:
+			celdas.append(cell)
+
+	if celdas.size() < 2:
+		return "Poné 2 súbditos en el sacrificio"
+	if subdito_combinado_scene == null:
+		return "Falta la escena del combinado"
+	if not ResourceManager.spend("sangre", costo_sangre_combinar):
+		return "Falta sangre"
+
+	var celda_primero := celdas[0]
+	var celda_segundo := celdas[1]
+	celda_primero.placed_tower.queue_free()
+	celda_segundo.placed_tower.queue_free()
+	for celda in [celda_primero, celda_segundo]:
+		celda.placed_tower = null
+		celda.set_occupied(false)
+
+	var combinado := subdito_combinado_scene.instantiate() as SubditoCombinado
+	celda_primero.add_child(combinado)
+	combinado.position = Vector3(0, 0.5, 0)
+	_ocupar(celda_primero, combinado)
+	combinado.celda_actual = celda_primero
+	combinado.combinado_pressed.connect(_on_combinado_pressed)
+	return ""
+
+
 func _on_resource_changed(id: String, new_amount: int) -> void:
 	if id == "sangre":
 		_actualizar_resaltado_sacrificio(new_amount)
