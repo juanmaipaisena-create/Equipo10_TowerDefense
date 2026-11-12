@@ -4,7 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://co2ait0a0cgt6" path="res://scenes/board/board.tscn" id="1_u1xfj"]
 [ext_resource type="PackedScene" uid="uid://be122exeopc3p" path="res://scenes/board/incubadora.tscn" id="3_q24mn"]
 [ext_resource type="PackedScene" uid="uid://3g63872lf1cf" path="res://scenes/HUDE/HUD.tscn" id="4_gyg6b"]
+[ext_resource type="PackedScene" uid="uid://q8b4yysf5flq" path="res://scenes/Subditos/subdito_combinado.tscn" id="4_sjxhf"]
 [ext_resource type="Script" uid="uid://cee8od464ign5" path="res://scenes/main/sacrificio_button.gd" id="5_dc040"]
+[ext_resource type="PackedScene" uid="uid://b75byjsnq2vbh" path="res://subdito_combinado_2.tscn" id="5_ko0rf"]
 
 [node name="Main" type="Node3D" unique_id=1386430368]
 script = ExtResource("1_q24mn")
@@ -20,10 +22,11 @@ transform = Transform3D(0.2957748, -0.012654015, -0.95517415, 0.9552578, 0.00391
 
 [node name="Incubadora" parent="." unique_id=1940757163 instance=ExtResource("3_q24mn")]
 transform = Transform3D(1, 0, 0, 0, 0.9988459, -0.04803043, 0, 0.04803043, 0.9988459, 3.431508, 0, -9.662054)
+escenas_combinado = Array[PackedScene]([ExtResource("4_sjxhf"), ExtResource("5_ko0rf")])
 
 [node name="HUD" parent="." unique_id=670798985 instance=ExtResource("4_gyg6b")]
 
-[node name="SacrificioButton" type="Button" parent="HUD/Panel/VBox" parent_id_path=PackedInt32Array(670798985, 291178159) index="7" unique_id=470660172]
+[node name="SacrificioButton" type="Button" parent="HUD/Panel/VBox" parent_id_path=PackedInt32Array(670798985, 291178159) index="6" unique_id=470660172]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 script = ExtResource("5_dc040")

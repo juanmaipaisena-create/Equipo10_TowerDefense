@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b75byjsnq2vbh"]
+
+[ext_resource type="Script" uid="uid://c4ypcfw31se42" path="res://subdito_diablillo.gd" id="1_mgk71"]
+[ext_resource type="PackedScene" uid="uid://bvnr07ghwd8ai" path="res://characters/esbirros/Diablillo.glb" id="2_elhlb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gt4s0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nwyaf"]
+size = Vector3(1.8286133, 5.057007, 1)
+
+[node name="subdito_combinado2" type="CharacterBody3D" unique_id=1583036167]
+script = ExtResource("1_mgk71")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=271072242]
+visible = false
+mesh = SubResource("BoxMesh_gt4s0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=637394362]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2340698, 0)
+shape = SubResource("BoxShape3D_nwyaf")
+
+[node name="Diablillo" parent="." unique_id=2105964292 instance=ExtResource("2_elhlb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.13598, 0)
+
+[connection signal="combinado_pressed" from="." to="." method="_on_combinado_pressed"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]

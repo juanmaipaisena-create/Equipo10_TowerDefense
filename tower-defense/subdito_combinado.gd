@@ -9,22 +9,51 @@ signal died
 @export var damage: float = 3.0
 @export var attack_range: float = 1.8
 @export var attack_cooldown: float = 1.0
+@export var animacion_idle: String = ""
+@export var escala_extra_por_nivel: float = 0.0
+
+@onready var anim: AnimationPlayer = find_child("AnimationPlayer", true, false)
 
 var celda_actual: BuildCell = null
 var current_health: float
 var en_combate: bool = false
+var nivel: int = 1
+var _vida_base: float
 var _cooldown: float = 0.0
-
-@onready var anim: AnimationPlayer = find_child("AnimationPlayer", true, false)
 
 
 func _ready() -> void:
 	input_event.connect(_on_input_event)
+	_vida_base = max_health
 	current_health = max_health
 	if anim:
-		anim.get_animation("Idle_Duende").loop_mode = Animation.LOOP_LINEAR
-		anim.get_animation("Run_Duende").loop_mode = Animation.LOOP_LINEAR
-		anim.play("Idle_Duende")
+		_reproducir_idle()
+
+
+func _reproducir_idle() -> void:
+	var elegida := ""
+	if animacion_idle != "" and anim.has_animation(animacion_idle):
+		elegida = animacion_idle
+	else:
+		for nombre_anim in anim.get_animation_list():
+			if nombre_anim == "RESET":
+				continue
+			if elegida == "":
+				elegida = nombre_anim
+			if nombre_anim.to_lower().contains("idle"):
+				elegida = nombre_anim
+				break
+
+	if elegida != "":
+		anim.get_animation(elegida).loop_mode = Animation.LOOP_LINEAR
+		anim.play(elegida)
+
+
+func set_nivel(valor: int) -> void:
+	nivel = maxi(valor, 1)
+	max_health = _vida_base * pow(2.0, nivel - 1)
+	current_health = max_health
+	scale = Vector3.ONE * (1.0 + escala_extra_por_nivel * (nivel - 1))
 
 
 func _on_input_event(_camera: Node, event: InputEvent, _pos: Vector3, _normal: Vector3, _shape_idx: int) -> void:
