@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cyaft2gnkw3jh"]
+
+[ext_resource type="PackedScene" uid="uid://cw6syww7m3mco" path="res://characters/enemies/Loba.glb" id="1_c06uk"]
+
+[node name="Node3D" type="Node3D" unique_id=1003944576]
+
+[node name="Loba" parent="." unique_id=825707553 instance=ExtResource("1_c06uk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8108858, 1.1920929e-07, -1.0722756)

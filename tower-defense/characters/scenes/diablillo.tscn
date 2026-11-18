@@ -1,10 +1,8 @@
-[gd_scene format=3 uid="uid://b4h4cm5xjvmnu"]
+[gd_scene format=3 uid="uid://ddgr8msgda5lf"]
 
-[ext_resource type="PackedScene" uid="uid://bvnr07ghwd8ai" path="res://characters/esbirros/Diablillo.glb" id="1_d2vmi"]
-[ext_resource type="Script" uid="uid://bmte7bscrafn6" path="res://diablillo.gd" id="1_n0ls2"]
+[ext_resource type="PackedScene" uid="uid://d1kkplmvoqf71" path="res://characters/esbirros/Diablillo.glb" id="1_d2vmi"]
 
-[node name="Node3D" type="Node3D" unique_id=880671779]
-script = ExtResource("1_n0ls2")
+[node name="Node3D" type="Node3D" unique_id=573107206]
 
-[node name="Diablillo" parent="." unique_id=1668850216 instance=ExtResource("1_d2vmi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.012899876, -1.1920929e-07, -0.025601625)
+[node name="Diablillo" parent="." unique_id=980031431 instance=ExtResource("1_d2vmi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
