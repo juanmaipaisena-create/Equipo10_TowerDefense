@@ -13,6 +13,7 @@ var current_wave: int = 0
 var game_over: bool = false
 var paused: bool = false
 var build_mode: bool = true
+var match_start_msec: float= 0.0
 
 var money: int:
 	get:
@@ -22,6 +23,8 @@ var money: int:
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	ResourceManager.resource_changed.connect(_on_resource_changed)
+	var metrics_res := load("res://metrics/game_metrics.tres") as MetricsResource 
+	Metrics.register_metrics(metrics_res)
 
 
 func _on_resource_changed(id: String, amount: int) -> void:
@@ -39,7 +42,7 @@ func reset_game() -> void:
 	paused = false
 
 	get_tree().paused = false
-
+	match_start_msec = Time.get_ticks_msec()
 	money_changed.emit(money)
 	blood_changed.emit(base_health)
 	wave_changed.emit(current_wave)
@@ -90,6 +93,9 @@ func set_wave(wave: int) -> void:
 func finish_game(won: bool) -> void:
 	if game_over:
 		return
+	var duration_seconds: float = (Time.get_ticks_msec() - match_start_msec) / 1000.0
+	Metrics.record_set("Time_Game", duration_seconds)
+	Metrics.export_to_csv()
 
 	game_over = true
 	paused = false
@@ -102,6 +108,12 @@ func finish_game(won: bool) -> void:
 
 	game_finished.emit(won)
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		if not game_over and match_start_msec > 0.0:
+			var duration_seconds: float = (Time.get_ticks_msec() - match_start_msec) / 1000.0
+			Metrics.record_set("Time_Game", duration_seconds)
+			Metrics.export_to_csv()
 
 func toggle_pause() -> void:
 	if game_over:
