@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dqrj2bpg0ajan"]
 
-[ext_resource type="PackedScene" uid="uid://c6ri4cwkvhsc1" path="res://characters/estructuras y moneda/Catedral de San Damian.glb" id="1_jp5hh"]
 [ext_resource type="Script" uid="uid://ceaie6jgjaxc2" path="res://scenes/board/menu.gd" id="1_wg0if"]
+[ext_resource type="PackedScene" uid="uid://bpkid8qbv2bqq" path="res://characters/estructuras y moneda/Catedral de San Damian.1.glb" id="2_wg0if"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wg0if"]
 albedo_color = Color(0.20392157, 0.48235294, 0.12941177, 1)
@@ -12,10 +12,11 @@ material = SubResource("StandardMaterial3D_wg0if")
 [node name="Node3D" type="Node3D" unique_id=2048626919]
 script = ExtResource("1_wg0if")
 
-[node name="Catedral de San Damian" parent="." unique_id=1213197476 instance=ExtResource("1_jp5hh")]
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1069743015]
 transform = Transform3D(1, 0, 0, 0, 0.0901632, 0.995927, 0, -0.995927, 0.0901632, 0, 25.265, 36.685)
+
+[node name="Catedral de San Damian_1" parent="." unique_id=670022103 instance=ExtResource("2_wg0if")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06596279, 0.071769714, -0.036949158)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=506876464]
 transform = Transform3D(95.97, 0, 0, 0, 1, 0, 0, 0, 35.06, 0, 0, 0)
