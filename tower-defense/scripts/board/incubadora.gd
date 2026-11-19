@@ -112,6 +112,7 @@ func _colocar_subdito_nuevo(cell: BuildCell) -> void:
 	var subdito := subdito_scene.instantiate() as Subdito
 	cell.add_child(subdito)
 	subdito.position = Vector3(0, 0.5, 0)
+	subdito.rotate_y(140)
 	cell.set_tower(subdito)
 	subdito.celda_actual = cell
 	subdito.subdito_pressed.connect(_on_subdito_pressed)
