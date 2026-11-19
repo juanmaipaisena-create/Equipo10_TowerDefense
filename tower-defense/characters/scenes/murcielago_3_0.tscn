@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://gih83u2mw21n"]
+
+[ext_resource type="PackedScene" uid="uid://cc1ovv56tu7so" path="res://characters/esbirros/Murcielago3.0.glb" id="1_or6by"]
+[ext_resource type="Script" uid="uid://dkd0c6m6igfo4" path="res://murcielago_3_0.gd" id="2_lo7u6"]
+
+[node name="Murcielago3_0" unique_id=1698273896 instance=ExtResource("1_or6by")]
+script = ExtResource("2_lo7u6")
+
+[node name="Skeleton3D" parent="Esqueleto" parent_id_path=PackedInt32Array(1650697087) index="0" unique_id=207898134]
+bones/2/rotation = Quaternion(0.21812636, -0.07982582, -0.58466244, 0.7773151)
+bones/7/rotation = Quaternion(0.20909853, 0.006888777, 0.5541351, 0.8057076)
+
+[node name="AnimationPlayer" parent="." index="2" unique_id=922026132]
+autoplay = &"Idle_mur"
