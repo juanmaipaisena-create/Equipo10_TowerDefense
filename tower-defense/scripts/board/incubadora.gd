@@ -63,6 +63,17 @@ func _escena_para_nivel(nivel: int) -> PackedScene:
 func _celda_libre(celda: BuildCell) -> bool:
 	return celda.placed_tower == null and not celda.occupied
 
+func _puede_colocar_en_tablero(celda: BuildCell) -> bool:
+	var tablero := celda.get_parent() as Board
+	# La incubadora y el sacrificio no tienen este límite.
+	if tablero == null or not tablero.campo_de_batalla:
+			return true
+	if tablero.contar_unidades() >= tablero.max_unidades:
+		GameManager.status_changed.emit(
+			"Solo puedes tener 6 unidades"
+		)
+		return false
+	return true
 
 func _ocupar(celda: BuildCell, nodo: Node3D) -> void:
 	celda.placed_tower = nodo
@@ -253,7 +264,10 @@ func _soltar_subdito() -> void:
 		else:
 			_devolver_a_origen()
 	elif _celda_libre(celda_destino):
-		_colocar_en_celda(subdito_arrastrado, celda_destino)
+		if _puede_colocar_en_tablero(celda_destino):
+			_colocar_en_celda(subdito_arrastrado, celda_destino)
+		else:
+			_devolver_a_origen()
 	else:
 		_devolver_a_origen()
 
@@ -263,18 +277,18 @@ func _soltar_subdito() -> void:
 
 func _soltar_combinado() -> void:
 	var celda := _celda_bajo_mouse_cualquiera()
-
 	if celda != null and _celda_libre(celda):
-		combinado_arrastrado.reparent(celda, true)
-		combinado_arrastrado.position = Vector3(0, 0.5, 0)
-		_ocupar(celda, combinado_arrastrado)
-		combinado_arrastrado.celda_actual = celda
+		if _puede_colocar_en_tablero(celda):
+			combinado_arrastrado.reparent(celda, true)
+			combinado_arrastrado.position = Vector3(0, 0.5, 0)
+			_ocupar(celda, combinado_arrastrado)
+			combinado_arrastrado.celda_actual = celda
+		else:
+			_devolver_combinado_a_origen()
 	else:
 		_devolver_combinado_a_origen()
-
 	combinado_arrastrado = null
 	celda_origen_combinado = null
-
 
 func _celda_bajo_mouse_cualquiera() -> BuildCell:
 	var mouse_pos := get_viewport().get_mouse_position()

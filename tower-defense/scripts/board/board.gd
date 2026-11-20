@@ -12,6 +12,7 @@ extends Node3D
 @export var x_aparicion: float = 8.0
 @export var x_meta: float = -8.0
 @export var tower_cost: int = 50
+@export var max_unidades: int = 6
 
 
 var dragged_entity: Node3D = null
@@ -50,6 +51,10 @@ func _on_cell_build_requested(cell: BuildCell) -> void:
 	if not GameManager.build_mode:
 		return
 	if not cell.can_build():
+		return
+	# Comprobar el límite de unidades del tablero de combate.
+	if campo_de_batalla and contar_unidades() >= max_unidades:
+		GameManager.status_changed.emit("Solo puedes tener 6 unidades en el tablero")
 		return
 	if tower_scene == null:
 		push_error("Board: no hay una Tower Scene asignada")
@@ -155,3 +160,10 @@ func spawn_zombie() -> Enemy:
 		Vector3(x_meta, 0.0, z)
 	)
 	return enemy
+	
+func contar_unidades() -> int:
+	var cantidad: int = 0
+	for cell in board_cells:
+		if is_instance_valid(cell) and is_instance_valid(cell.placed_tower):
+			cantidad += 1
+	return cantidad
