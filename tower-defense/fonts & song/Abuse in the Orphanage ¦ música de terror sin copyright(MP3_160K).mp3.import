@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ddl6nygx3v03i"
+path="res://.godot/imported/Abuse in the Orphanage ¦ música de terror sin copyright(MP3_160K).mp3-c7b98e23a0f8676700df64e2faa7194a.mp3str"
+
+[deps]
+
+source_file="res://fonts & song/Abuse in the Orphanage ¦ música de terror sin copyright(MP3_160K).mp3"
+dest_files=["res://.godot/imported/Abuse in the Orphanage ¦ música de terror sin copyright(MP3_160K).mp3-c7b98e23a0f8676700df64e2faa7194a.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

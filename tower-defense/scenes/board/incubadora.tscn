@@ -8,14 +8,18 @@
 [ext_resource type="PackedScene" uid="uid://b2cueqo65qdqf" path="res://characters/scenes/zombie.tscn" id="5_4efvg"]
 [ext_resource type="Script" uid="uid://cko7iin2ybyu6" path="res://scripts/Managers/sangre_generator.gd" id="5_6w46p"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4efvg"]
+albedo_color = Color(0.14243981, 0.20912427, 0.35144463, 1)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_xjdbw"]
+material = SubResource("StandardMaterial3D_4efvg")
 size = Vector2(36.095, 12.915)
 
 [sub_resource type="BoxMesh" id="BoxMesh_bpdcn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h08qo"]
 vertex_color_is_srgb = true
-albedo_color = Color(0.55152947, 0.9703906, 0.5797178, 1)
+albedo_color = Color(0.15098557, 0.35229474, 0.16910732, 1)
 
 [sub_resource type="Environment" id="Environment_h08qo"]
 

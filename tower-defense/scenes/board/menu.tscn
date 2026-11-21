@@ -2,18 +2,23 @@
 
 [ext_resource type="Script" uid="uid://ceaie6jgjaxc2" path="res://scenes/board/menu.gd" id="1_wg0if"]
 [ext_resource type="PackedScene" uid="uid://bpkid8qbv2bqq" path="res://characters/estructuras y moneda/Catedral de San Damian.1.glb" id="2_wg0if"]
+[ext_resource type="FontFile" uid="uid://c8msioni1w0k2" path="res://fonts & song/Alternight Demo.otf" id="3_xn3q8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wg0if"]
-albedo_color = Color(0.20392157, 0.48235294, 0.12941177, 1)
+albedo_color = Color(0.123352654, 0.31161255, 0.073377006, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xn3q8"]
 material = SubResource("StandardMaterial3D_wg0if")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xn3q8"]
+albedo_color = Color(5.1740557e-07, 0.19136506, 0.2848813, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_aqin7"]
+material = SubResource("StandardMaterial3D_xn3q8")
+size = Vector2(230.38, 89.59)
+
 [node name="Node3D" type="Node3D" unique_id=2048626919]
 script = ExtResource("1_wg0if")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1069743015]
-transform = Transform3D(1, 0, 0, 0, 0.0901632, 0.995927, 0, -0.995927, 0.0901632, 0, 25.265, 36.685)
 
 [node name="Catedral de San Damian_1" parent="." unique_id=670022103 instance=ExtResource("2_wg0if")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06596279, 0.071769714, -0.036949158)
@@ -22,8 +27,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06596279, 0.071769714, -0.
 transform = Transform3D(95.97, 0, 0, 0, 1, 0, 0, 0, 35.06, 0, 0, 0)
 mesh = SubResource("PlaneMesh_xn3q8")
 
+[node name="Fondo" type="MeshInstance3D" parent="." unique_id=1872372179]
+transform = Transform3D(1, 0, 0, 0, -0.008674199, -0.9999624, 0, 0.9999624, -0.008674199, 0, 30.592789, -21.694715)
+mesh = SubResource("PlaneMesh_aqin7")
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=890810402]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.365, 37.46)
+transform = Transform3D(1, 0, 0, 0, 0.9296801, -0.36836794, 0, 0.36836794, 0.9296801, 0, 3.255312, 21.157906)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1428589555]
 
@@ -41,11 +50,32 @@ grow_vertical = 0
 
 [node name="PLAY" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=141097996]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_xn3q8")
 text = "PLAY"
 
 [node name="EXIT" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=2128600025]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_xn3q8")
 text = "EXIT"
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=835990627]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -61.0
+offset_top = 56.0
+offset_right = 61.0
+offset_bottom = 79.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_xn3q8")
+theme_override_font_sizes/font_size = 38
+text = "The Dark Guard"
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=208175188]
+transform = Transform3D(1, 0, 0, 0, 0.46900922, -0.8831933, 0, 0.8831933, 0.46900922, 0, -0.5204935, 12.706282)
+light_energy = 5.0
+spot_range = 33.0
+spot_angle = 61.91465
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/PLAY" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/EXIT" to="." method="_on_exit_pressed"]

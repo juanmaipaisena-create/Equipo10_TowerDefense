@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://db8th1w5aosya"]
+
+[ext_resource type="AudioStream" uid="uid://ddl6nygx3v03i" path="res://fonts & song/Abuse in the Orphanage ¦ música de terror sin copyright(MP3_160K).mp3" id="1_yjl84"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" unique_id=635815177]
+stream = ExtResource("1_yjl84")
+autoplay = true

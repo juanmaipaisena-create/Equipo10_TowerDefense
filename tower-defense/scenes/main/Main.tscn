@@ -17,9 +17,6 @@ campo_de_batalla = true
 [node name="Camera3D" type="Camera3D" parent="." unique_id=188035008]
 transform = Transform3D(-0.028427405, 0.8429273, -0.53727627, -0.034751337, 0.53633523, 0.84328943, 0.9989916, 0.04264359, 0.014046219, -7.868, 10.086, -4.163)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1652456119]
-transform = Transform3D(0.2957748, -0.012654015, -0.95517415, 0.9552578, 0.003918039, 0.2957489, -5.670564e-10, -0.9999124, 0.013246704, 0, 8.623838, -4.1726108)
-
 [node name="Incubadora" parent="." unique_id=1940757163 instance=ExtResource("3_q24mn")]
 transform = Transform3D(1, 0, 0, 0, 0.9988459, -0.04803043, 0, 0.04803043, 0.9988459, 3.431508, 0, -9.662054)
 escenas_combinado = Array[PackedScene]([ExtResource("4_sjxhf"), ExtResource("5_ko0rf")])
@@ -30,6 +27,18 @@ escenas_combinado = Array[PackedScene]([ExtResource("4_sjxhf"), ExtResource("5_k
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 script = ExtResource("5_dc040")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=351537517]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.8104925, -9.765755)
+omni_range = 6.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="." unique_id=1479141878]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.269949, 2.1250076, -9.726759)
+omni_range = 3.530774
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="." unique_id=111886598]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.44707966, 2.2706337, 0.06395626)
+omni_range = 6.0
 
 [connection signal="pressed" from="HUD/Panel/VBox/SacrificioButton" to="HUD/Panel/VBox/SacrificioButton" method="_on_pressed"]
 
