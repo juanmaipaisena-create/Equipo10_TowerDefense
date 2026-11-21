@@ -6,6 +6,7 @@
 script = ExtResource("1_m10ay")
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=1646293534]
+custom_minimum_size = Vector2(230, 0)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -15,6 +16,7 @@ grow_horizontal = 0
 
 [node name="VBox" type="VBoxContainer" parent="Panel" unique_id=291178159]
 layout_mode = 2
+theme_override_constants/separation = 6
 
 [node name="BloodLabel" type="Label" parent="Panel/VBox" unique_id=2073217220]
 layout_mode = 2
@@ -36,6 +38,7 @@ layout_mode = 2
 
 [node name="GuidePanel" type="PanelContainer" parent="." unique_id=1497977445]
 visible = false
+z_index = 10
 custom_minimum_size = Vector2(540, 430)
 anchors_preset = 8
 anchor_left = 0.5

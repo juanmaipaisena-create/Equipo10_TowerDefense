@@ -17,6 +17,9 @@ var main_node: Node3D
 
 func _ready() -> void:
 	#build_button.text = "Construcción: ACTIVADA"
+	guide_button.text = "Guia"
+	restart_button.text = "Restart"
+	pause_button.text = "Pausar"
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	# La construcción queda siempre habilitada.
 	GameManager.build_mode = true
@@ -24,6 +27,7 @@ func _ready() -> void:
 	guide_panel.hide()
 
 	#build_button.pressed.connect(_on_build_pressed)
+	guide_button.pressed.connect(_on_build_pressed)
 	pause_button.pressed.connect(_on_pause_pressed)
 	restart_button.pressed.connect(_on_restart_pressed)
 	guide_button.pressed.connect(_on_guide_pressed)
@@ -63,16 +67,16 @@ func _on_build_pressed() -> void:
 	if GameManager.game_over:
 		return
 	GameManager.build_mode = not GameManager.build_mode
-	if GameManager.build_mode:
-		#build_button.text = "Construcción: ACTIVADA"
-		GameManager.status_changed.emit(
-			"Selecciona una celda libre"
-		)
-	else:
-		#build_button.text = "Construcción: DESACTIVADA"
-		GameManager.status_changed.emit(
-			"Construcción desactivada"
-		)
+	#if GameManager.build_mode:
+		##build_button.text = "Construcción: ACTIVADA"
+		#GameManager.status_changed.emit(
+			#"Selecciona una celda libre"
+		#)
+	#else:
+		##build_button.text = "Construcción: DESACTIVADA"
+		#GameManager.status_changed.emit(
+			#"Construcción desactivada"
+		#)
 
 func _on_guide_pressed() -> void:
 	guide_panel.show()
