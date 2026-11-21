@@ -8,14 +8,18 @@
 [ext_resource type="PackedScene" uid="uid://b2cueqo65qdqf" path="res://characters/scenes/zombie.tscn" id="5_4efvg"]
 [ext_resource type="Script" uid="uid://cko7iin2ybyu6" path="res://scripts/Managers/sangre_generator.gd" id="5_6w46p"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4efvg"]
+albedo_color = Color(0.083261214, 0.10342761, 0.52975535, 1)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_xjdbw"]
+material = SubResource("StandardMaterial3D_4efvg")
 size = Vector2(36.095, 12.915)
 
 [sub_resource type="BoxMesh" id="BoxMesh_bpdcn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h08qo"]
 vertex_color_is_srgb = true
-albedo_color = Color(0.55152947, 0.9703906, 0.5797178, 1)
+albedo_color = Color(0.10899254, 0.26883888, 0.12335039, 1)
 
 [sub_resource type="Environment" id="Environment_h08qo"]
 
@@ -25,7 +29,7 @@ subdito_scene = ExtResource("2_xjdbw")
 subdito_combinado_scene = ExtResource("3_4efvg")
 
 [node name="Pared" type="MeshInstance3D" parent="." unique_id=1026627664]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 5.77, -9.545)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.033489227, 5.965238, -9.685524)
 mesh = SubResource("PlaneMesh_xjdbw")
 
 [node name="Pared2" type="MeshInstance3D" parent="." unique_id=835010660]
