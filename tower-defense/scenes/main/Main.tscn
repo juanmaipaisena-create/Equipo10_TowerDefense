@@ -31,6 +31,12 @@ custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 script = ExtResource("5_dc040")
 
+[node name="GuidePanel" parent="HUD" index="1" unique_id=1497977445]
+custom_minimum_size = Vector2(580, 400)
+
+[node name="CloseButton" parent="HUD/GuidePanel/VBox" parent_id_path=PackedInt32Array(670798985, 792107501) index="2" unique_id=2043700262]
+text = "Cerrar Guia"
+
 [connection signal="pressed" from="HUD/Panel/VBox/SacrificioButton" to="HUD/Panel/VBox/SacrificioButton" method="_on_pressed"]
 
 [editable path="Board"]
