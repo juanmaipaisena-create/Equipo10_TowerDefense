@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://codbseap35el6"]
 
 [ext_resource type="Script" uid="uid://uuivwq7dtt5o" path="res://scripts/enemy/enemy.gd" id="1_sjakr"]
-[ext_resource type="PackedScene" uid="uid://byojdtlpbcobh" path="res://characters/enemies/Zombie.1.glb" id="2_vwhkw"]
+[ext_resource type="PackedScene" uid="uid://blos0vaiip446" path="res://characters/scenes/zombie2.tscn" id="2_vwhkw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xu5e0"]
 albedo_color = Color(0.2789542, 0.27484298, 0.007563892, 1)
@@ -40,5 +40,4 @@ mesh = SubResource("SphereMesh_xu5e0")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.475879, 0)
 shape = SubResource("CapsuleShape3D_xu5e0")
 
-[node name="Zombie_1" parent="." unique_id=1095163872 instance=ExtResource("2_vwhkw")]
-transform = Transform3D(-0.99983525, 0, 0.018150438, 0, 1, 0, -0.018150438, 0, -0.99983525, 0, 0.036144048, 0)
+[node name="Node3D" parent="." unique_id=1857106035 instance=ExtResource("2_vwhkw")]

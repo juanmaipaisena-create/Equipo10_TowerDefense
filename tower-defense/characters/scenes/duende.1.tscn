@@ -1,10 +1,8 @@
 [gd_scene format=3 uid="uid://bopixvncfobav"]
 
 [ext_resource type="PackedScene" uid="uid://c0kx48nqs5gmj" path="res://characters/esbirros/Duende.2.glb" id="1_ak6yx"]
-[ext_resource type="Script" uid="uid://njj7opghm4tq" path="res://characters/scenes/duende.1.gd" id="1_gj3wy"]
 
 [node name="Node3D" type="Node3D" unique_id=942279216]
-script = ExtResource("1_gj3wy")
 
 [node name="Duende_2" parent="." unique_id=636501490 instance=ExtResource("1_ak6yx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011577249, 0, 0.004396677)

@@ -17,7 +17,7 @@ var current_health: float
 var en_combate: bool = false
 var _cooldown: float = 0.0
 
-@onready var anim: AnimationPlayer = get_node_or_null("Murcielago2_0/AnimationPlayer")
+@onready var anim: AnimationPlayer = get_node_or_null("Murcielago3_0/AnimationPlayer")
 
 
 func _ready() -> void:

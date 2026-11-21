@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bd25k84t4hgfq" path="res://scenes/Subditos/subdito.tscn" id="2_xjdbw"]
 [ext_resource type="PackedScene" uid="uid://q8b4yysf5flq" path="res://scenes/Subditos/subdito_combinado.tscn" id="3_4efvg"]
 [ext_resource type="PackedScene" uid="uid://c52lwlvtmel4o" path="res://HUDEconomia.tscn" id="4_iphmx"]
+[ext_resource type="PackedScene" uid="uid://b2cueqo65qdqf" path="res://characters/scenes/zombie.tscn" id="5_4efvg"]
 [ext_resource type="Script" uid="uid://cko7iin2ybyu6" path="res://scripts/Managers/sangre_generator.gd" id="5_6w46p"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xjdbw"]
@@ -45,6 +46,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.341939, 0, 0)
 rows = 2
 columns = 3
 tower_scene = null
+enemy_scene = ExtResource("5_4efvg")
 
 [node name="Ground" parent="SlotsIncubadora" index="0" unique_id=1155033157]
 transform = Transform3D(0.649, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -55,6 +57,7 @@ rows = 2
 columns = 1
 cell_size = 2.0
 tower_scene = null
+enemy_scene = ExtResource("5_4efvg")
 
 [node name="Ground" parent="ZonaSacrificio" index="0" unique_id=1155033157]
 transform = Transform3D(0.685, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

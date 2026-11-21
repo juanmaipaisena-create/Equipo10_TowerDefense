@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://blos0vaiip446"]
+
+[ext_resource type="PackedScene" uid="uid://58oa4dxrv6ge" path="res://characters/enemies/Zombie.2.glb" id="1_33l35"]
+
+[node name="Node3D" type="Node3D" unique_id=1857106035]
+transform = Transform3D(-0.99944615, 0, -0.0332773, 0, 1, 0, 0.0332773, 0, -0.99944615, 0, 0, 0)
+
+[node name="Zombie_2" parent="." unique_id=1764863685 instance=ExtResource("1_33l35")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02614355, 0, 0.01189065)
